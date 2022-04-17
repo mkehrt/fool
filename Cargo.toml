@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 glfw = "0.41"
 luminance = "0.44"
+luminance-derive = "0.9.0"
 luminance-glfw = "0.16"
 luminance-windowing = "0.10"
 

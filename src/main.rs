@@ -3,12 +3,16 @@ use luminance_glfw::GlfwSurface;
 use luminance::context::GraphicsContext as _;
 use luminance::pipeline::PipelineState;
 use luminance_windowing::{WindowDim, WindowOpt};
-use std::sync::mpsc;
+
+mod geometry;
 
 static WIDTH: u32 = 897;
 static HEIGHT: u32 = 1497;
 
 static NAME: &str = "The Fool";
+
+const VS_STR: &str = include_str!("vs.glsl");
+const FS_STR: &str = include_str!("fs.glsl");
 
 fn make_surface() -> GlfwSurface {
     let dim = WindowDim::Windowed {
