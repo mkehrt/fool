@@ -1,15 +1,17 @@
 [package]
 name = "fool"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-glfw = "0.41"
-luminance = "0.44"
-luminance-derive = "0.9.0"
-luminance-glfw = "0.16"
-luminance-windowing = "0.10"
-
-
+gl = "0.6"
+pathfinder_canvas = "0.5.0"
+pathfinder_color = "0.5.0"
+pathfinder_content = "0.5.0"
+pathfinder_geometry = "0.5.1"
+pathfinder_gl = "0.5.0"
+pathfinder_gpu = "0.5.0"
+pathfinder_renderer = "0.5.0"
+pathfinder_resources = "0.5.0"
+sdl2 = "0.32"
+sdl2-sys = "0.32"
