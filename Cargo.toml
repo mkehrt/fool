@@ -1,17 +1,23 @@
 [package]
 name = "fool"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 
+[lib]
+crate-type = ["cdylib"]
+
 [dependencies]
-gl = "0.6"
-pathfinder_canvas = "0.5.0"
-pathfinder_color = "0.5.0"
-pathfinder_content = "0.5.0"
-pathfinder_geometry = "0.5.1"
-pathfinder_gl = "0.5.0"
-pathfinder_gpu = "0.5.0"
-pathfinder_renderer = "0.5.0"
-pathfinder_resources = "0.5.0"
-sdl2 = "0.32"
-sdl2-sys = "0.32"
+speedy2d = "1.6.0"
+js-sys = "0.3.57"
+wasm-bindgen = "0.2.80"
+
+[dependencies.web-sys]
+version = "0.3.4"
+features = [
+  'CanvasRenderingContext2d',
+  'Document',
+  'Element',
+  'HtmlCanvasElement',
+  'Window',
+]
+
