@@ -25,8 +25,8 @@ fn get_context() -> web_sys::CanvasRenderingContext2d {
     context
 }
 
-#[wasm_bindgen(main)]
-pub fn main() {
+#[wasm_bindgen]
+pub fn start() {
     println!("AAAAAAA");
     let mut context = get_context();
     geometry::draw(&mut context);
