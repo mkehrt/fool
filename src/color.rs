@@ -9,20 +9,20 @@ pub struct Color {
 }
 
 impl Color {
-   pub fn perturb(&self) -> Self {
-       let red = self.red.perturb();
-       let green = self.green.perturb();
-       let blue = self.blue.perturb();
+    pub fn perturb(&self) -> Self {
+        let red = self.red.perturb();
+        let green = self.green.perturb();
+        let blue = self.blue.perturb();
 
-       Self { red, blue, green}
+        Self { red, blue, green }
     }
 
-   pub fn new_random() -> Self {
-       let red = Red::new_random();
-       let green = Green::new_random();
-       let blue = Blue::new_random();
+    pub fn new_random() -> Self {
+        let red = Red::new_random();
+        let green = Green::new_random();
+        let blue = Blue::new_random();
 
-       Self { red, green, blue }
+        Self { red, green, blue }
     }
 }
 

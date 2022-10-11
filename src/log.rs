@@ -12,4 +12,3 @@ extern "C" {
 macro_rules! console_log {
     ($($t:tt)*) => (crate::log::log(&format_args!($($t)*).to_string()))
 }
-

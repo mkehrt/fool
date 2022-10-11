@@ -1,7 +1,7 @@
 use crate::color::Color;
-use crate::Context;
 use crate::element::Element;
 use crate::perturbable::Perturbable;
+use crate::Context;
 
 use super::Parent;
 
@@ -19,6 +19,11 @@ pub fn draw(context: &mut Context, element: &Element, parent: &Parent) {
 }
 
 fn set_gradient(context: &mut Context, _proximal: Color, distal: Color) {
-    let style = format!("rgb({:}, {:}, {:})", distal.red.get_value(), distal.green.get_value(), distal.blue.get_value());
+    let style = format!(
+        "rgb({:}, {:}, {:})",
+        distal.red.get_value(),
+        distal.green.get_value(),
+        distal.blue.get_value()
+    );
     context.set_fill_style(&style.into());
 }

@@ -53,15 +53,14 @@ fn one_step(root: &mut Element, parent: &mut Parent) {
     context.reset_transform();
     clear(&mut context);
     set_initial_transform(&mut context);
-    
+
     root.draw(&parent, &mut context);
 }
 
 fn run(mut root: Element, mut parent: Parent) {
     loop {
-        let closure = Closure::wrap(Box::new(|| {
-            one_step(&mut root, &mut parent)
-        }) as Box<dyn FnMut()>);
+        let closure =
+            Closure::wrap(Box::new(|| one_step(&mut root, &mut parent)) as Box<dyn FnMut()>);
 
         get_window().request_animation_frame(closure.as_ref().unchecked_ref());
     }
@@ -75,7 +74,6 @@ pub fn start() {
 
     let root = Element::new_random();
     let parent = Parent::new_random();
-    
+
     run(root, parent);
 }
-

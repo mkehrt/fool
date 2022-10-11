@@ -1,7 +1,7 @@
 use crate::color::Color;
-use crate::Context;
 use crate::generate_perturbable;
 use crate::perturbable::Perturbable;
+use crate::Context;
 
 mod children;
 mod draw;
@@ -27,7 +27,12 @@ impl Element {
         let angle = self.angle.perturb();
         let children = self.children.perturb();
 
-        Self { distal_color, height, angle, children }
+        Self {
+            distal_color,
+            height,
+            angle,
+            children,
+        }
     }
 
     pub fn new_random() -> Self {
@@ -35,8 +40,13 @@ impl Element {
         let height = Height::new_random();
         let angle = Angle::new_random();
         let children = Children::new();
-    
-        Self { distal_color, height, angle, children }
+
+        Self {
+            distal_color,
+            height,
+            angle,
+            children,
+        }
     }
 }
 
@@ -55,6 +65,6 @@ impl Parent {
 
     pub fn new_random() -> Self {
         let color = Color::new_random();
-        Self{ color }
+        Self { color }
     }
 }
