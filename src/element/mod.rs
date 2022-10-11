@@ -1,10 +1,12 @@
-use crate::children::Children;
 use crate::color::Color;
 use crate::Context;
 use crate::generate_perturbable;
 use crate::perturbable::Perturbable;
 
+mod children;
 mod draw;
+
+use children::Children;
 
 #[derive(Debug)]
 pub struct Element {
@@ -38,9 +40,21 @@ impl Element {
     }
 }
 
+generate_perturbable!(f64, Height, 0.1, 5.0, 0.3);
+generate_perturbable!(f64, Angle, -90.0, 90.0, 5.0);
+
 pub struct Parent {
     pub color: Color,
 }
 
-generate_perturbable!(f64, Height, 0.1, 5.0, 0.3);
-generate_perturbable!(f64, Angle, -90.0, 90.0, 5.0);
+impl Parent {
+    pub fn perturb(&self) -> Self {
+        let color = self.color.perturb();
+        Self { color }
+    }
+
+    pub fn new_random() -> Self {
+        let color = Color::new_random();
+        Self{ color }
+    }
+}
