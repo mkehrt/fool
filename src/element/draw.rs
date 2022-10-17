@@ -16,6 +16,12 @@ pub fn draw(context: &mut Context, element: &Element, parent: &Parent) {
 
     set_gradient(context, parent.color, element.distal_color);
     context.fill();
+
+    /*
+    for child in self.children {
+        draw_child(child);
+    }
+    */
 }
 
 fn set_gradient(context: &mut Context, _proximal: Color, distal: Color) {
