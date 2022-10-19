@@ -5,8 +5,8 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::Window;
 
-static WIDTH: i32 = 640;
-static HEIGHT: i32 = 480;
+static WIDTH: i32 = 800;
+static HEIGHT: i32 = 800;
 
 mod color;
 mod element;
@@ -39,8 +39,8 @@ fn get_context() -> Context {
 }
 
 fn set_initial_transform(context: &mut Context) {
-    let _ = context.translate(150.0, 150.0);
-    let _ = context.scale(20.0, 20.0);
+    let _ = context.translate(400.0, 400.0);
+    let _ = context.scale(100.0, 100.0);
 }
 
 fn clear(context: &mut Context) {
@@ -57,6 +57,10 @@ fn one_step(root: &mut Element, parent: &mut Parent) -> (Element, Parent) {
     set_initial_transform(&mut context);
 
     root.draw(&parent, &mut context);
+
+    let (height_count, total_height) = root.height_statistics();
+    let average_height = total_height / height_count as f64;
+    console_log!("Average height: {:}", average_height);
 
     (root, parent)
 }
@@ -86,6 +90,8 @@ fn run(mut root: Element, mut parent: Parent) {
 pub fn start() {
     panic::set_hook(Box::new(console_error_panic_hook::hook));
 
+    // TODO background color
+    // TODO root width
     let root = Element::new_random();
     let parent = Parent::new_random();
 
