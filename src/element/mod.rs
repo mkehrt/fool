@@ -14,13 +14,15 @@ use children::Children;
 pub struct Element {
     pub distal_color: Color,
     height_exponent: HeightExponent,
-    pub angle: Angle,
+    angle: Angle,
     pub children: Children,
 }
 
 impl Element {
     pub fn draw(&self, parent: &Parent, context: &mut Context) {
-        draw::draw(context, /* depth = */ 1, self, parent)
+        draw::draw(
+            context, /* depth = */ 1, /* length_scale = */ 1.0, self, parent,
+        )
     }
 
     pub fn perturb(&self) -> Self {
@@ -53,6 +55,10 @@ impl Element {
 
     pub fn height(&self) -> f64 {
         Float::powf(3.0, self.height_exponent.value)
+    }
+
+    fn angle(&self) -> f64 {
+        self.angle.value * std::f64::consts::PI / 180.0
     }
 
     pub fn height_statistics(&self) -> (i64, f64) {

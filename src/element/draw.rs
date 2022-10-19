@@ -3,53 +3,62 @@ use crate::element::{Element, Parent};
 use crate::perturbable::Perturbable;
 use crate::Context;
 
-pub fn draw(context: &mut Context, depth: u64, element: &Element, parent: &Parent) {
+pub fn draw(
+    context: &mut Context,
+    depth: u64,
+    length_scale: f64,
+    element: &Element,
+    parent: &Parent,
+) {
     context.save();
 
     let height = element.height();
-    context.scale(1.0, height).unwrap();
+    context.scale(1.0, length_scale * height).unwrap();
 
     context.begin_path();
 
-    if depth == 4 {
-        context.move_to(-0.5, 0.0);
-        context.line_to(0.5, 0.0);
-        context.line_to(0.5, -1.0);
-        context.line_to(-0.5, -1.0);
-        context.line_to(-0.5, 0.0);
+    context.move_to(-0.5, 0.0);
+    context.line_to(0.5, 0.0);
+    context.line_to(0.5, -1.0);
+    context.line_to(-0.5, -1.0);
+    context.line_to(-0.5, 0.0);
 
-        set_gradient(context, parent.color, element.distal_color);
-        context.fill();
-    }
+    set_gradient(context, parent.color, element.distal_color);
+    context.fill();
 
     context.restore();
 
     for (index, child) in element.children.children.iter().enumerate() {
-        draw_child(context, depth, element, &child, index);
-        break;
+        draw_child(context, depth, length_scale, element, &child, index);
     }
 }
 
-fn draw_child(context: &mut Context, depth: u64, element: &Element, child: &Element, index: usize) {
+fn draw_child(
+    context: &mut Context,
+    depth: u64,
+    length_scale: f64,
+    element: &Element,
+    child: &Element,
+    index: usize,
+) {
     context.save();
 
-    let rotation = element.angle.value * std::f64::consts::PI / 180.0;
-    context.rotate(rotation).unwrap();
-
-    let height = element.height();
-    context.translate(0.0, -height).unwrap();
+    context.rotate(element.angle()).unwrap();
+    context
+        .translate(0.0, -element.height() * length_scale)
+        .unwrap();
 
     let width = 1.0 / element.children.children.len() as f64;
     let translate = (-0.5 + (width * index as f64)) + (width / 2.0);
 
     context.translate(translate, 0.0).unwrap();
-    context.scale(width, 1.0).unwrap();
+    context.scale(width, width).unwrap();
 
     let parent = Parent {
         color: element.distal_color,
     };
 
-    draw(context, depth + 1, child, &parent);
+    draw(context, depth + 1, length_scale / width, child, &parent);
 
     context.restore()
 }
