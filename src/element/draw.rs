@@ -58,7 +58,13 @@ fn draw_child(
         color: element.distal_color,
     };
 
-    draw(context, depth + 1, length_scale / width, child, &parent);
+    draw(
+        context,
+        depth + 1,
+        length_scale / element.height(),
+        child,
+        &parent,
+    );
 
     context.restore()
 }
