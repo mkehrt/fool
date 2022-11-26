@@ -58,7 +58,7 @@ impl Element {
     }
 
     fn angle(&self) -> f64 {
-        self.angle.value * std::f64::consts::PI / 180.0
+        (self.angle.value) * std::f64::consts::PI / 180.0
     }
 
     pub fn height_statistics(&self) -> (i64, f64) {

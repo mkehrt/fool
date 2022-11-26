@@ -3,6 +3,8 @@ use crate::element::{Element, Parent};
 use crate::perturbable::Perturbable;
 use crate::Context;
 
+use num::Float;
+
 pub fn draw(
     context: &mut Context,
     depth: u64,
@@ -10,21 +12,80 @@ pub fn draw(
     element: &Element,
     parent: &Parent,
 ) {
+    if depth > 1 {
+        return;
+    }
+    let angle = element.angle() / std::f64::consts::PI * 180.0;
+    if angle > 90.0 {
+        crate::console_log!("Angle: {:}", angle);
+    }
+
     context.save();
 
     let height = element.height();
-    context.scale(1.0, length_scale * height).unwrap();
+    let angle = element.angle();
 
-    context.begin_path();
+    context.scale(height, height).unwrap();
 
-    context.move_to(-0.5, 0.0);
-    context.line_to(0.5, 0.0);
-    context.line_to(0.5, -1.0);
-    context.line_to(-0.5, -1.0);
-    context.line_to(-0.5, 0.0);
+    if angle < 0.0 {
+        context.begin_path();
+        let radius = -2.0 * std::f64::consts::PI / angle;
+        let center_x = -radius;
+        let center_y = 0.0;
 
-    set_gradient(context, parent.color, element.distal_color);
-    context.fill();
+        context
+            .ellipse_with_anticlockwise(center_x, center_y, radius, radius, 0.0, 0.0, angle, true)
+            .unwrap();
+
+        context.set_line_width(1.0);
+        context.stroke();
+    } else if angle == 0.0 {
+    } else
+    /* angle > 0.0 */
+    {
+        context.begin_path();
+        let radius = 2.0 * std::f64::consts::PI / angle;
+        let center_x = radius;
+        let center_y = 0.0;
+
+        context
+            .ellipse(
+                center_x,
+                center_y,
+                radius,
+                radius,
+                0.0,
+                std::f64::consts::PI,
+                -angle,
+            )
+            .unwrap();
+
+        context.set_line_width(1.0);
+        context.stroke();
+    }
+
+    /*
+    let intermediate_x = Float::sin(element.angle() / 2.0) * height / 2.0;
+    let intermediate_y = -Float::cos(element.angle() / 2.0) * height / 2.0;
+
+    let distal_x = Float::sin(element.angle()) * height;
+    let distal_y = -Float::cos(element.angle()) * height;
+    */
+
+    //context.move_to(-0.5, 0.0);
+    //context.line_to(0.5, 0.0);
+    //    context.move_to(0.0, 0.0);
+    //   context
+    //       .arc_to(intermediate_x, intermediate_y, distal_x, distal_y, height)
+    //       .unwrap();
+    // context.line_to, -1.0);
+    // context.line_to(-0.5, -1.0);
+    //context.line_to(-0.5, 0.0);
+
+    //    set_gradient(context, parent.color, element.distal_color);
+    //context.fill();
+    //  context.set_line_width(1.0 / length_scale);
+    //  context.stroke();
 
     context.restore();
 
@@ -76,5 +137,5 @@ fn set_gradient(context: &mut Context, _proximal: Color, distal: Color) {
         distal.green.get_value(),
         distal.blue.get_value()
     );
-    context.set_fill_style(&style.into());
+    context.set_stroke_style(&style.into());
 }

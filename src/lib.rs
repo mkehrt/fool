@@ -39,8 +39,8 @@ fn get_context() -> Context {
 }
 
 fn set_initial_transform(context: &mut Context) {
-    let _ = context.translate(400.0, 400.0);
-    let _ = context.scale(100.0, 100.0);
+    let _ = context.translate(400.0, 750.0);
+    let _ = context.scale(50.0, 50.0);
 }
 
 fn clear(context: &mut Context) {
@@ -58,9 +58,11 @@ fn one_step(root: &mut Element, parent: &mut Parent) -> (Element, Parent) {
 
     root.draw(&parent, &mut context);
 
+    /*
     let (height_count, total_height) = root.height_statistics();
     let average_height = total_height / height_count as f64;
     console_log!("Average height: {:}", average_height);
+    */
 
     (root, parent)
 }
