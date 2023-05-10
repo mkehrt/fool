@@ -1,8 +1,6 @@
 use rand::prelude::*;
 use rand_chacha::ChaCha8Rng;
-use std::cell::RefCell;
 use std::panic;
-use std::rc::Rc;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::Window;
@@ -56,33 +54,18 @@ fn clear(context: &mut Context) {
     context.clear_rect(0.0, 0.0, WIDTH as f64, HEIGHT as f64);
 }
 
-fn request_animation_frame(f: &Closure<dyn FnMut()>) {
-    let _ = get_window().request_animation_frame(f.as_ref().unchecked_ref());
-}
-
 fn run() {
-    // Deep magic from before the dawn of time^W^W^W^W^W https://rustwasm.github.io/wasm-bindgen/examples/request-animation-frame.html
-    let internal_closure = Rc::new(RefCell::new(None));
-    let external_closure = internal_closure.clone();
+    let mut context = get_context();
 
-    *external_closure.borrow_mut() = Some(Closure::new(move || {
-        let mut context = get_context();
+    let _ = context.reset_transform();
+    set_initial_transform(&mut context);
 
-        let _ = context.reset_transform();
-        set_initial_transform(&mut context);
+    let mut rng = random();
 
-        let mut rng = random();
+    clear(&mut context);
+    // context.set_image_smoothing_enabled(false);
 
-        clear(&mut context);
-        // context.set_image_smoothing_enabled(false);
-
-        draw::draw(&mut context, &mut rng);
-
-        // Schedule ourself for another requestAnimationFrame callback.
-        request_animation_frame(internal_closure.borrow().as_ref().unwrap());
-    }));
-
-    request_animation_frame(external_closure.borrow().as_ref().unwrap());
+    draw::draw(&mut context, &mut rng);
 }
 
 #[wasm_bindgen]
