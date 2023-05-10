@@ -10,9 +10,9 @@ use web_sys::Window;
 static WIDTH_IN_PIXELS: f64 = 360.0;
 static HEIGHT_IN_PIXELS: f64 = 600.0;
 
-static WIDTH: f64 = 24.0;
-static UNIT_IN_PIXELS: f64 = WIDTH_IN_PIXELS / WIDTH;
-static HEIGHT: f64 = HEIGHT_IN_PIXELS / UNIT_IN_PIXELS;
+static HEIGHT: f64 = 40.0;
+static UNIT_IN_PIXELS: f64 = HEIGHT_IN_PIXELS / HEIGHT;
+static WIDTH: f64 = WIDTH_IN_PIXELS / UNIT_IN_PIXELS;
 
 static RANDOM_SEED: u64 = 2;
 
@@ -74,6 +74,7 @@ fn run() {
         let mut rng = random();
 
         clear(&mut context);
+        // context.set_image_smoothing_enabled(false);
 
         draw::draw(&mut context, &mut rng);
 
