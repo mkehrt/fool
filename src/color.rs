@@ -1,42 +1,29 @@
-use crate::generate_perturbable;
-use crate::perturbable::Perturbable;
+use wasm_bindgen::JsValue;
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Clone, Copy)]
 pub struct Color {
-    pub red: Red,
-    pub green: Green,
-    pub blue: Blue,
+    red: u8,
+    green: u8,
+    blue: u8,
 }
 
 impl Color {
-    pub fn perturb(&self) -> Self {
-        let red = self.red.perturb();
-        let green = self.green.perturb();
-        let blue = self.blue.perturb();
-
-        Self { red, blue, green }
-    }
-
-    pub fn new_random() -> Self {
-        let red = Red::new_random();
-        let green = Green::new_random();
-        let blue = Blue::new_random();
-
+    pub const fn new(red: u8, green: u8, blue: u8) -> Self {
         Self { red, green, blue }
     }
 }
 
-generate_perturbable!(i64, Red, 0, 255, 5);
-generate_perturbable!(i64, Green, 0, 255, 5);
-generate_perturbable!(i64, Blue, 0, 255, 5);
-
-/*
-use std::convert::From;
-use wasm_bindgen::prelude::*;
-
 impl From<Color> for JsValue {
-   fn from(that: Color) -> JsValue {
-      JSVal
-   }
+    fn from(that: Color) -> JsValue {
+        let str = format!("rgb({:}, {:}, {:})", that.red, that.green, that.blue);
+        let string = String::from(str);
+        string.into()
+    }
 }
-*/
+
+pub mod colors {
+    use super::Color;
+
+    pub static SKY: Color = Color::new(0, 00, 50);
+    pub static SKY_STARS: Color = Color::new(220, 220, 220);
+}
