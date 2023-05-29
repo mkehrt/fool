@@ -9,6 +9,6 @@ mod star;
 
 pub fn draw<R: Rng>(context: &mut Context, rng: &mut R) {
     sky::draw(context, rng);
-    // rock::draw(context);
+    rock::draw(context);
     fool::draw(context);
 }
