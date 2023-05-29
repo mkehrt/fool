@@ -5,8 +5,8 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::Window;
 
-static WIDTH_IN_PIXELS: f64 = 360.0;
-static HEIGHT_IN_PIXELS: f64 = 600.0;
+static WIDTH_IN_PIXELS: f64 = 897.0;
+static HEIGHT_IN_PIXELS: f64 = 1497.0;
 
 static HEIGHT: f64 = 40.0;
 static UNIT_IN_PIXELS: f64 = HEIGHT_IN_PIXELS / HEIGHT;
@@ -64,6 +64,8 @@ fn run() {
 
     clear(&mut context);
     // context.set_image_smoothing_enabled(false);
+
+    log::log(format!("HEIGHT: {:}, WIDTH: {:}", HEIGHT, WIDTH).as_str());
 
     draw::draw(&mut context, &mut rng);
 }

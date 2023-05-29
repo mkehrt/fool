@@ -6,6 +6,9 @@ use crate::{Context, HEIGHT};
 static STAR_RADIUS: f64 = 0.35;
 static STROKE_WIDTH: f64 = 0.1;
 
+static X_TRANSLATE: f64 = 7.408967936;
+static Y_TRANSLATE: f64 = 11.75;
+
 struct Node<'a>(&'a str, f64, f64);
 struct Edge<'a>(&'a str, &'a str);
 
@@ -21,9 +24,9 @@ fn nodes() -> Vec<Node<'static>> {
         Node("NeckFront", 3.8, 2.7),
         Node("FrontShoulder", 5.0, 2.0),
         Node("FrontInnerElbow", 7.0, 0.0),
-        Node("FrontHand", 9.0, -3.8),
+        Node("FrontHand", 9.0, -3.7),
         Node("FrontElbow", 7.5, 0.4),
-        Node("FrontArmpit", 5.5, 3.0),
+        Node("FrontArmpit", 5.5, 3.1),
         Node("FrontWaist", 5.0, 8.2),
         Node("BackShoulder", 2.0, 3.6),
         Node("BackElbow", 0.3, 6.8),
@@ -33,19 +36,19 @@ fn nodes() -> Vec<Node<'static>> {
         Node("BackWaist", 3.0, 8.0),
         Node("BackWaist", 3.0, 8.0),
         Node("FrontWaist", 5.0, 8.2),
-        Node("Groin", 6.0, 9.5),
-        Node("FrontKnee", 10.0, 11.5),
+        Node("Groin", 5.9, 9.4),
+        Node("FrontKnee", 9.65, 11.2),
         Node("FrontAnkle", 8.0, 15.9),
-        Node("FrontToes", 9.0, 16.5),
+        Node("FrontToes", 9.45, 16.4),
         Node("FrontHeel", 7.0, 16.5),
-        Node("FrontInnerKnee", 8.5, 12.0),
+        Node("FrontInnerKnee", 8.15, 12.0),
         Node("Root", 4.6, 11.0),
-        Node("BackKnee", 3.7, 14.8),
+        Node("BackKnee", 3.5, 14.8),
         Node("BackAnkle", 1.0, 18.5),
-        Node("BackToes", 1.4, 19.5),
+        Node("BackToes", 1.15, 20.2),
         Node("BackHeel", 0.2, 18.5),
-        Node("BackInnerKnee", 2.25, 14.5),
-        Node("Butt", 2.5, 10.2),
+        Node("BackInnerKnee", 2.4, 14.25),
+        Node("Butt", 2.5, 10.1),
     ]
 }
 
@@ -100,7 +103,7 @@ pub fn draw(context: &mut Context) {
 
     let _ = context.scale(1.0, -1.0);
     let _ = context.translate(0.0, -HEIGHT);
-    let _ = context.translate(6.0, 10.0);
+    let _ = context.translate(X_TRANSLATE, Y_TRANSLATE);
 
     for Node(_name, x, y) in nodes() {
         let star_angle = 0.0;
@@ -121,7 +124,7 @@ pub fn draw(context: &mut Context) {
 
         context.stroke();
 
-        log(format!("Line {:} {:} {:} {:}", begin_x, begin_y, end_x, end_y).as_str());
+        // log(format!("Line {:} {:} {:} {:}", begin_x, begin_y, end_x, end_y).as_str());
     }
 
     context.restore();

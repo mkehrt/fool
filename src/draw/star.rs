@@ -25,7 +25,7 @@ pub fn draw(
     context.set_fill_style(&color.into());
     context.fill_rect(-0.5, -0.5, 1.0, 1.0);
 
-    log(format!("Star: {}, {}, {}", x, y, radius).as_str());
+    // log(format!("Star: {}, {}, {}", x, y, radius).as_str());
 
     context.restore();
 }
