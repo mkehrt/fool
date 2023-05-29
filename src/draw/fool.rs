@@ -3,7 +3,7 @@ use crate::draw::star;
 use crate::log::log;
 use crate::{Context, HEIGHT};
 
-static STAR_RADIUS: f64 = 0.35;
+static STAR_RADIUS: f64 = 0.25;
 static STROKE_WIDTH: f64 = 0.1;
 
 static X_TRANSLATE: f64 = 7.408967936;

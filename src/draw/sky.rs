@@ -6,7 +6,7 @@ use crate::{Context, HEIGHT, WIDTH};
 use super::star;
 
 const NUM_STARS: u64 = 75;
-const MAX_STAR_RADIUS: f64 = 0.35;
+const MAX_STAR_RADIUS: f64 = 0.25;
 
 pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
     context.set_fill_style(&colors::SKY.into());
