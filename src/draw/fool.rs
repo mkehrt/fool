@@ -1,13 +1,15 @@
+use rand::Rng;
+
 use crate::color::colors;
 use crate::draw::star;
 use crate::log::log;
-use crate::{Context, HEIGHT};
+use crate::{Context, HEIGHT, STROKE_WIDTH};
 
 static STAR_RADIUS: f64 = 0.25;
-static STROKE_WIDTH: f64 = 0.1;
+static STAR_MARGIN: f64 = 0.3;
 
 static X_TRANSLATE: f64 = 7.408967936;
-static Y_TRANSLATE: f64 = 11.75;
+static Y_TRANSLATE: f64 = 10.75;
 
 struct Node<'a>(&'a str, f64, f64);
 struct Edge<'a>(&'a str, &'a str);
@@ -24,25 +26,23 @@ fn nodes() -> Vec<Node<'static>> {
         Node("NeckFront", 3.8, 2.7),
         Node("FrontShoulder", 5.0, 2.0),
         Node("FrontInnerElbow", 7.0, 0.0),
-        Node("FrontHand", 9.0, -3.7),
+        Node("FrontHand", 8.9, -3.6),
         Node("FrontElbow", 7.5, 0.4),
         Node("FrontArmpit", 5.5, 3.1),
-        Node("FrontWaist", 5.0, 8.2),
+        Node("FrontWaist", 5.2, 8.2),
         Node("BackShoulder", 2.0, 3.6),
         Node("BackElbow", 0.3, 6.8),
         Node("BackHand", -0.5, 10.65),
         Node("BackInnerElbow", 1.0, 7.0),
         Node("BackArmpit", 2.5, 4.9),
         Node("BackWaist", 3.0, 8.0),
-        Node("BackWaist", 3.0, 8.0),
-        Node("FrontWaist", 5.0, 8.2),
-        Node("Groin", 5.9, 9.4),
+        Node("Groin", 5.9, 9.2),
         Node("FrontKnee", 9.65, 11.2),
         Node("FrontAnkle", 8.0, 15.9),
         Node("FrontToes", 9.45, 16.4),
         Node("FrontHeel", 7.0, 16.5),
         Node("FrontInnerKnee", 8.15, 12.0),
-        Node("Root", 4.6, 11.0),
+        Node("Root", 4.6, 10.9),
         Node("BackKnee", 3.5, 14.8),
         Node("BackAnkle", 1.0, 18.5),
         Node("BackToes", 1.15, 20.2),
@@ -98,7 +98,7 @@ fn node_for_name(name_to_find: &str) -> Node {
         .expect(format!("Couldn't find node {:}.", name_to_find).as_str())
 }
 
-pub fn draw(context: &mut Context) {
+pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
     context.save();
 
     let _ = context.scale(1.0, -1.0);
@@ -106,26 +106,49 @@ pub fn draw(context: &mut Context) {
     let _ = context.translate(X_TRANSLATE, Y_TRANSLATE);
 
     for Node(_name, x, y) in nodes() {
-        let star_angle = 0.0;
+        let star_angle = rng.gen_range(0.0..360.0);
         star::draw(context, colors::FOOL, x, y, STAR_RADIUS, star_angle);
     }
 
     context.set_stroke_style(&colors::FOOL.into());
     context.set_line_width(STROKE_WIDTH);
 
-    for Edge(begin, end) in edges() {
-        let Node(_name, begin_x, begin_y) = node_for_name(begin);
+    for Edge(start, end) in edges() {
+        let Node(_name, start_x, start_y) = node_for_name(start);
         let Node(_name, end_x, end_y) = node_for_name(end);
+
+        let ((start_x, start_y), (end_x, end_y)) = compute_ends(start_x, start_y, end_x, end_y);
 
         context.begin_path();
 
-        context.move_to(begin_x, begin_y);
+        context.move_to(start_x, start_y);
         context.line_to(end_x, end_y);
 
+        context.close_path();
         context.stroke();
 
-        // log(format!("Line {:} {:} {:} {:}", begin_x, begin_y, end_x, end_y).as_str());
+        // log(format!("Line {:} {:} {:} {:}", start_x, start_y, end_x, end_y).as_str());
     }
 
     context.restore();
+}
+
+fn compute_ends(start_x: f64, start_y: f64, end_x: f64, end_y: f64) -> ((f64, f64), (f64, f64)) {
+    let delta_x = start_x - end_x;
+    let delta_y = start_y - end_y;
+
+    let distance = f64::sqrt((delta_x * delta_x) + (delta_y * delta_y));
+
+    let normalized_delta_x = delta_x / distance;
+    let normalized_delta_y = delta_y / distance;
+
+    let x_change = normalized_delta_x * STAR_MARGIN;
+    let y_change = normalized_delta_y * STAR_MARGIN;
+
+    let new_start_x = start_x - x_change;
+    let new_start_y = start_y - y_change;
+    let new_end_x = end_x + x_change;
+    let new_end_y = end_y + y_change;
+
+    ((new_start_x, new_start_y), (new_end_x, new_end_y))
 }

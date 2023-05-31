@@ -12,7 +12,9 @@ static HEIGHT: f64 = 40.0;
 static UNIT_IN_PIXELS: f64 = HEIGHT_IN_PIXELS / HEIGHT;
 static WIDTH: f64 = WIDTH_IN_PIXELS / UNIT_IN_PIXELS;
 
-static RANDOM_SEED: u64 = 2;
+static RANDOM_SEED: u64 = 18;
+
+static STROKE_WIDTH: f64 = 0.1;
 
 mod color;
 mod draw;
@@ -45,11 +47,6 @@ fn random() -> impl rand::Rng {
     ChaCha8Rng::seed_from_u64(RANDOM_SEED)
 }
 
-fn set_initial_transform(context: &mut Context) {
-    let _ = context.scale(UNIT_IN_PIXELS, -UNIT_IN_PIXELS);
-    let _ = context.translate(0.0, -HEIGHT);
-}
-
 fn clear(context: &mut Context) {
     context.clear_rect(0.0, 0.0, WIDTH as f64, HEIGHT as f64);
 }
@@ -57,17 +54,13 @@ fn clear(context: &mut Context) {
 fn run() {
     let mut context = get_context();
 
-    let _ = context.reset_transform();
-    set_initial_transform(&mut context);
+    let rng = random();
 
-    let mut rng = random();
-
-    clear(&mut context);
     // context.set_image_smoothing_enabled(false);
 
     log::log(format!("HEIGHT: {:}, WIDTH: {:}", HEIGHT, WIDTH).as_str());
 
-    draw::draw(&mut context, &mut rng);
+    draw::draw(&mut context, rng);
 }
 
 #[wasm_bindgen]

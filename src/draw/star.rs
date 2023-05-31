@@ -40,11 +40,14 @@ pub fn draw(
     let star_points = star_points();
 
     let (start_x, start_y) = star_points.last().unwrap();
+    context.begin_path();
     context.move_to(*start_x, *start_y);
 
     for (x, y) in star_points {
         context.line_to(x, y);
     }
+
+    context.close_path();
 
     context.set_fill_style(&color.into());
     context.fill();

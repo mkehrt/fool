@@ -27,5 +27,7 @@ pub mod colors {
     pub static SKY: Color = Color::new(0, 00, 50);
     pub static SKY_STARS: Color = Color::new(220, 220, 220);
     pub static ROCK: Color = Color::new(100, 100, 100);
-    pub static FOOL: Color = Color::new(230, 190, 0);
+    pub static ROCK_STROKE: Color = Color::new(50, 50, 50);
+    pub static FOOL: Color = Color::new(255, 200, 0);
+    pub static FOOL_DARK: Color = Color::new(130, 0, 0);
 }
