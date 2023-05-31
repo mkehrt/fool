@@ -1,4 +1,4 @@
-use crate::color::colors;
+use crate::color::{colors, Color};
 use crate::{Context, STROKE_WIDTH, WIDTH};
 
 static TOE_X: f64 = 8.558967936;
@@ -7,12 +7,12 @@ static TOE_Y: f64 = 9.05;
 static EPSILON: f64 = 0.0;
 
 pub fn draw(context: &mut Context) {
-    draw_one(context, draw_top);
-    draw_one(context, draw_middle);
-    draw_one(context, draw_bottom);
+    draw_one(context, draw_top, colors::ROCK_LIGHT);
+    draw_one(context, draw_middle, colors::ROCK_MEDIUM);
+    draw_one(context, draw_bottom, colors::ROCK_DARK);
 }
 
-pub fn draw_one<F>(context: &mut Context, draw: F)
+pub fn draw_one<F>(context: &mut Context, draw: F, color: Color)
 where
     F: FnOnce(&mut Context) -> (),
 {
@@ -22,7 +22,7 @@ where
 
     // context.close_path();
 
-    context.set_fill_style(&colors::ROCK.into());
+    context.set_fill_style(&color.into());
     context.fill();
 
     context.set_line_width(STROKE_WIDTH);
