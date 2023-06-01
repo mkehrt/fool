@@ -9,7 +9,7 @@ static STAR_RADIUS: f64 = 0.25;
 static STAR_MARGIN: f64 = 0.3;
 
 static X_TRANSLATE: f64 = 7.408967936;
-static Y_TRANSLATE: f64 = 10.75;
+static Y_TRANSLATE: f64 = 10.65;
 
 struct Node<'a>(&'a str, f64, f64);
 struct Edge<'a>(&'a str, &'a str);
@@ -47,7 +47,7 @@ fn nodes() -> Vec<Node<'static>> {
         Node("Root", 4.5, 10.8),
         Node("BackKnee", 3.6, 14.8),
         Node("BackAnkle", 1.0, 18.5),
-        Node("BackToes", 1.15, 20.2),
+        Node("BackToes", 1.15, 20.3),
         Node("BackHeel", 0.2, 18.5),
         Node("BackInnerKnee", 2.4, 14.25),
         Node("Butt", 2.5, 10.1),

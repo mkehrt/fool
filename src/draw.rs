@@ -26,7 +26,7 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
 
     context.restore();
 
-    // draw_margins(context)
+    draw_margins(context)
 }
 
 fn draw_margins(context: &mut Context) {
