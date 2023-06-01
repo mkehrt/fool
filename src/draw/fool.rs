@@ -41,7 +41,7 @@ fn nodes() -> Vec<Node<'static>> {
         // Node("FrontKneeBottom", 8.9, 10.9),
         Node("FrontKnee", 9.3, 10.2),
         Node("FrontAnkle", 7.8, 14.6),
-        Node("FrontToes", 9.45, 15.0),
+        Node("FrontToes", 9.35, 15.0),
         Node("FrontHeel", 7.0, 15.4),
         Node("FrontInnerKnee", 7.7, 11.2),
         Node("Root", 4.5, 10.8),

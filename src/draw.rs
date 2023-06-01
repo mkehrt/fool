@@ -30,7 +30,7 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
 }
 
 fn draw_margins(context: &mut Context) {
-    let margin_color = "rgba(255, 200, 255, 0.25)";
+    let margin_color = "rgba(255, 255, 255, 0.75)";
     //let margin_color = "rgb(255, 200, 255)";
     context.set_fill_style(&margin_color.into());
 
