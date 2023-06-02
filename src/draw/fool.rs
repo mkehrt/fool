@@ -105,9 +105,6 @@ fn node_for_name(name_to_find: &str) -> Node {
 
 pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
     context.save();
-
-    let _ = context.scale(1.0, -1.0);
-    let _ = context.translate(0.0, -HEIGHT);
     let _ = context.translate(X_TRANSLATE, Y_TRANSLATE);
 
     for Node(_name, x, y) in nodes() {

@@ -1,5 +1,5 @@
 use crate::color::{colors, Color};
-use crate::{Context, STROKE_WIDTH, WIDTH};
+use crate::{Context, HEIGHT, STROKE_WIDTH};
 
 static TOE_X: f64 = 8.558967936;
 static TOE_Y: f64 = 9.05;
@@ -7,9 +7,16 @@ static TOE_Y: f64 = 9.05;
 static EPSILON: f64 = 0.0;
 
 pub fn draw(context: &mut Context) {
+    // Draw from the bottom.
+    context.save();
+    context.scale(1.0, -1.0);
+    context.translate(0.0, -HEIGHT);
+
     draw_one(context, draw_top, colors::ROCK_LIGHT);
     draw_one(context, draw_middle, colors::ROCK_MEDIUM);
     draw_one(context, draw_bottom, colors::ROCK_DARK);
+
+    context.restore();
 }
 
 pub fn draw_one<F>(context: &mut Context, draw: F, color: Color)
@@ -19,8 +26,6 @@ where
     context.begin_path();
 
     draw(context);
-
-    // context.close_path();
 
     context.set_fill_style(&color.into());
     context.fill();

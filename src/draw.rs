@@ -11,8 +11,7 @@ mod stars;
 mod text;
 
 fn set_initial_transform(context: &mut Context) {
-    let _ = context.scale(UNIT_IN_PIXELS, -UNIT_IN_PIXELS);
-    let _ = context.translate(0.0, -HEIGHT);
+    let _ = context.scale(UNIT_IN_PIXELS, UNIT_IN_PIXELS);
 }
 
 pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
@@ -28,7 +27,7 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
 
     context.restore();
 
-    draw_margins(context, true)
+    // draw_margins(context, true)
 }
 
 fn draw_margins(context: &mut Context, with_inner: bool) {
