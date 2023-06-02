@@ -29,7 +29,7 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
 
     context.restore();
 
-    draw_margins(context, true)
+    // draw_margins(context, true)
 }
 
 #[allow(unused)]
