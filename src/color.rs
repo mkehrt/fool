@@ -1,6 +1,6 @@
 use wasm_bindgen::JsValue;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Color {
     red: u8,
     green: u8,
