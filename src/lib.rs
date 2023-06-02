@@ -12,7 +12,7 @@ static HEIGHT: f64 = 40.0;
 static UNIT_IN_PIXELS: f64 = HEIGHT_IN_PIXELS / HEIGHT;
 static WIDTH: f64 = WIDTH_IN_PIXELS / UNIT_IN_PIXELS;
 
-static RANDOM_SEED: u64 = 18;
+static RANDOM_SEED: u64 = 22;
 
 static STROKE_WIDTH: f64 = 0.1;
 
