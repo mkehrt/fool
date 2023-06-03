@@ -1,16 +1,11 @@
 use crate::color::{colors, Color};
 use crate::{Context, HEIGHT, STROKE_WIDTH};
 
-static TOE_X: f64 = 8.558967936;
-static TOE_Y: f64 = 9.05;
-
-static EPSILON: f64 = 0.0;
-
 pub fn draw(context: &mut Context) {
     // Draw from the bottom.
     context.save();
-    context.scale(1.0, -1.0);
-    context.translate(0.0, -HEIGHT);
+    context.scale(1.0, -1.0).expect("Scale rocks");
+    context.translate(0.0, -HEIGHT).expect("Tranlate rocks");
 
     draw_one(context, draw_top, colors::ROCK_LIGHT);
     draw_one(context, draw_middle, colors::ROCK_MEDIUM);

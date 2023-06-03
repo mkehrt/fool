@@ -2,8 +2,7 @@ use rand::Rng;
 
 use crate::color::colors;
 use crate::draw::star;
-use crate::log::log;
-use crate::{Context, HEIGHT, STROKE_WIDTH};
+use crate::{Context, STROKE_WIDTH};
 
 static STAR_RADIUS: f64 = 0.25;
 static STAR_MARGIN: f64 = 0.3;

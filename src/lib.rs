@@ -23,32 +23,28 @@ mod log;
 type Context = web_sys::CanvasRenderingContext2d;
 
 fn get_window() -> Window {
-    web_sys::window().unwrap()
+    web_sys::window().expect("Get window")
 }
+
 fn get_context() -> Context {
-    let document = get_window().document().unwrap();
-    let canvas = document.get_element_by_id("canvas").unwrap();
+    let document = get_window().document().expect("Get document");
+    let canvas = document.get_element_by_id("canvas").expect("Get canvas");
     let canvas: web_sys::HtmlCanvasElement = canvas
         .dyn_into::<web_sys::HtmlCanvasElement>()
-        .map_err(|_| ())
-        .unwrap();
+        .expect("Convert canvas to websys canvas");
 
     let context = canvas
         .get_context("2d")
-        .unwrap()
-        .unwrap()
+        .expect("Get context 1")
+        .expect("Get context 2")
         .dyn_into::<web_sys::CanvasRenderingContext2d>()
-        .unwrap();
+        .expect("Convert context to websys context");
 
     context
 }
 
 fn random() -> impl rand::Rng {
     ChaCha8Rng::seed_from_u64(RANDOM_SEED)
-}
-
-fn clear(context: &mut Context) {
-    context.clear_rect(0.0, 0.0, WIDTH as f64, HEIGHT as f64);
 }
 
 fn run() {

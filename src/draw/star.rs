@@ -3,8 +3,6 @@ use std::f64::consts::PI;
 use crate::color::Color;
 use crate::Context;
 
-use crate::log::log;
-
 // From https://people.sc.fsu.edu/~jburkardt/datasets/polygon/polygon.html
 fn star_points() -> Vec<(f64, f64)> {
     vec![
@@ -39,7 +37,7 @@ pub fn draw(
 
     let star_points = star_points();
 
-    let (start_x, start_y) = star_points.last().unwrap();
+    let (start_x, start_y) = star_points.last().expect("Get last star point");
     context.begin_path();
     context.move_to(*start_x, *start_y);
 

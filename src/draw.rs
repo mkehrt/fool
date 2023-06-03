@@ -1,5 +1,4 @@
-use crate::color::Color;
-use crate::{Context, HEIGHT, HEIGHT_IN_PIXELS, UNIT_IN_PIXELS, WIDTH_IN_PIXELS};
+use crate::{Context, UNIT_IN_PIXELS};
 
 use rand::Rng;
 
@@ -10,8 +9,6 @@ mod sky;
 mod star;
 mod stars;
 mod text;
-
-const MARGIN_IN_PIXELS: f64 = 36.0;
 
 fn set_initial_transform(context: &mut Context) {
     let _ = context.scale(UNIT_IN_PIXELS, UNIT_IN_PIXELS);
