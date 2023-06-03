@@ -8,8 +8,8 @@ use crate::{Context, HEIGHT, STROKE_WIDTH};
 static STAR_RADIUS: f64 = 0.25;
 static STAR_MARGIN: f64 = 0.3;
 
-static X_TRANSLATE: f64 = 7.408967936;
-static Y_TRANSLATE: f64 = 11.55;
+static X_TRANSLATE: f64 = 8.4;
+static Y_TRANSLATE: f64 = 12.55;
 
 struct Node<'a>(&'a str, f64, f64);
 struct Edge<'a>(&'a str, &'a str);
@@ -128,8 +128,6 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
 
         context.close_path();
         context.stroke();
-
-        // log(format!("Line {:} {:} {:} {:}", start_x, start_y, end_x, end_y).as_str());
     }
 
     context.restore();

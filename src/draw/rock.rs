@@ -10,7 +10,7 @@ pub fn draw(context: &mut Context) {
     // Draw from the bottom.
     context.save();
     context.scale(1.0, -1.0);
-    context.translate(0.0, -HEIGHT - 1.0);
+    context.translate(0.0, -HEIGHT);
 
     draw_one(context, draw_top, colors::ROCK_LIGHT);
     draw_one(context, draw_middle, colors::ROCK_MEDIUM);
@@ -36,25 +36,25 @@ where
 }
 
 pub fn draw_top(context: &mut Context) {
-    context.line_to(-EPSILON, 6.0);
+    context.line_to(0.0, 5.644057125);
 
-    context.line_to(9.502166838, 9.382228583);
-    context.line_to(9.0, 8.333);
-    context.line_to(-EPSILON, 4.333);
+    context.line_to(10.502166838, 9.382228583);
+    context.line_to(10.0, 8.0);
+    context.line_to(0.0, 3.56043956);
 }
 
 pub fn draw_middle(context: &mut Context) {
-    context.move_to(-EPSILON, 4.333);
+    context.move_to(0.0, 3.56043956);
 
-    context.line_to(7.5, 7.296703297 + 0.333);
-    context.line_to(4.0, 4.666);
-    context.line_to(-EPSILON, 2.166);
+    context.line_to(8.5, 7.296703297);
+    context.line_to(5.0, 4.0);
+    context.line_to(0.0, 0.8902439023);
 }
 
 pub fn draw_bottom(context: &mut Context) {
-    context.move_to(-EPSILON, 2.1666);
+    context.move_to(0.0, 0.8902439023);
 
-    context.line_to(3.0, 3.329268293 + 0.666);
-    context.line_to(2.0, -EPSILON);
-    context.line_to(-EPSILON, -1.0);
+    context.line_to(4.0, 3.329268293);
+    context.line_to(3.0, 0.0);
+    context.line_to(1.0, -1.0);
 }

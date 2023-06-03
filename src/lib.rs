@@ -8,7 +8,7 @@ use web_sys::Window;
 static WIDTH_IN_PIXELS: f64 = 897.0;
 static HEIGHT_IN_PIXELS: f64 = 1497.0;
 
-static HEIGHT: f64 = 40.0;
+static HEIGHT: f64 = 42.0;
 static UNIT_IN_PIXELS: f64 = HEIGHT_IN_PIXELS / HEIGHT;
 static WIDTH: f64 = WIDTH_IN_PIXELS / UNIT_IN_PIXELS;
 
