@@ -9,7 +9,7 @@ static STAR_RADIUS: f64 = 0.25;
 static STAR_MARGIN: f64 = 0.3;
 
 static X_TRANSLATE: f64 = 7.408967936;
-static Y_TRANSLATE: f64 = 10.55;
+static Y_TRANSLATE: f64 = 11.55;
 
 struct Node<'a>(&'a str, f64, f64);
 struct Edge<'a>(&'a str, &'a str);
