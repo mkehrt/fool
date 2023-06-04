@@ -52,4 +52,5 @@ pub fn draw_bottom(context: &mut Context) {
     context.line_to(4.0, 3.329268293);
     context.line_to(3.0, 0.0);
     context.line_to(1.0, -1.0);
+    context.line_to(-1.0, -1.0);
 }
