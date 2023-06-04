@@ -45,9 +45,19 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
         stars += 1;
     }
 
-    // Draw some extra stars.
+    // Draw some extra stars to fill in blank spots.
+    // Inside fool.
     star::draw(context, colors::SKY_STARS, 12.25, 18.0, 0.17, 270.0);
-    star::draw(context, colors::SKY_STARS, 13.25, 21.5, 0.12, 270.0);
+    star::draw(context, colors::SKY_STARS, 13.25, 21.5, 0.12, 20.0);
+    // Elsewhere
+    star::draw(context, colors::SKY_STARS, 3.25, 3.5, 0.14, 27.0);
+    star::draw(context, colors::SKY_STARS, 5.5, 8.0, 0.16, 53.0);
+    star::draw(context, colors::SKY_STARS, 3.5, 31.0, 0.12, 70.0);
+    star::draw(context, colors::SKY_STARS, 10.3, 9.4, 0.12, 23.0);
+    star::draw(context, colors::SKY_STARS, 16.5, 30.0, 0.18, 51.0);
+    star::draw(context, colors::SKY_STARS, 17.4, 31.0, 0.1, 86.0);
+    star::draw(context, colors::SKY_STARS, 18.4, 37.0, 0.14, 44.0);
+    star::draw(context, colors::SKY_STARS, 22.4, 32.0, 0.18, 33.0);
 }
 
 fn star_is_allowed(context: &mut Context, star_x: f64, star_y: f64) -> bool {
