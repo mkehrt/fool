@@ -6,7 +6,7 @@ use crate::{Context, HEIGHT, HEIGHT_IN_PIXELS, UNIT_IN_PIXELS, WIDTH_IN_PIXELS};
 const MARGIN_IN_PIXELS: f64 = 36.0;
 
 pub fn draw(context: &mut Context, with_inner: bool) {
-    let margin_color = "rgba(255, 255, 255, 0.8)";
+    let margin_color = "rgba(255, 255, 255, 0.75)";
     context.set_fill_style(&margin_color.into());
 
     context.fill_rect(0.0, 0.0, WIDTH_IN_PIXELS, MARGIN_IN_PIXELS);

@@ -27,5 +27,5 @@ pub fn draw<R: Rng>(context: &mut Context, mut rng: R) {
 
     context.restore();
 
-    margins::draw(context, false);
+    // margins::draw(context, false);
 }
