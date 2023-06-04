@@ -16,6 +16,6 @@ pub fn draw(context: &mut Context) {
 
     context.set_fill_style(&colors::ROCK_DARK.into());
     context
-        .fill_text("MATTHEW W. KEHRT", WIDTH - 1.1, HEIGHT - 1.1)
+        .fill_text("MATTHEW W. KEHRT", WIDTH - 4.0, HEIGHT - 1.2)
         .expect("Signature");
 }
